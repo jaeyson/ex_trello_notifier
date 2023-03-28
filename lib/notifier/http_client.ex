@@ -23,14 +23,15 @@ defmodule Notifier.HttpClient do
     }
 
     options = [
-      ssl: [
-        {:versions, [:"tlsv1.2"]},
-        verify: :verify_peer,
-        cacerts: :public_key.cacerts_get(),
-        customize_hostname_check: [
-          match_fun: :public_key.pkix_verify_hostname_match_fun(:https)
-        ]
-      ],
+      # ssl: [
+      #   {:versions, [:"tlsv1.2"]},
+      #   verify: :verify_peer,
+      #   # cacerts: :pubkey_os_cacerts.get()
+      #   cacerts: :public_key.cacerts_get(),
+      #   customize_hostname_check: [
+      #     match_fun: :public_key.pkix_verify_hostname_match_fun(:https)
+      #   ]
+      # ],
       timeout: 5_000,
       recv_timeout: 5_000
     ]
