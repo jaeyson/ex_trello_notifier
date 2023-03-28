@@ -5,7 +5,10 @@ defmodule NotifierWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", NotifierWeb do
+  scope "/", NotifierWeb do
     pipe_through :api
+
+    get "/", NotifierController, :index
+    post "/sentry", NotifierController, :sentry
   end
 end
