@@ -78,7 +78,7 @@ defmodule Notifier.HttpClient do
     |> Map.get("id")
   end
 
-  def create_new_card(%{"name" => _, "desc" => _, "urlSource" => _} = query) do
+  def create_new_card(%{"name" => _, "desc" => _} = query) do
     list_name = "todo"
     method = :post
     path = "cards"

@@ -27,21 +27,22 @@ defmodule NotifierWeb.NotifierController do
       |> URI.to_string()
 
     desc = """
-    #{issue["title"]}
-    culprit: #{issue["culprit"]}
-    filename: #{issue["metadata"]["filename"]}
-    type: #{issue["metadata"]["type"]}
-    status: #{issue["status"]}
-    level: #{issue["level"]}
-    first seen: #{issue["first_seen"]}
-    last seen: #{issue["last_seen"]}
-    platform: #{issue["platform"]}
+    ### #{issue["title"]}
+
+    **culprit**: `#{issue["culprit"]}`
+    **filename**: `#{issue["metadata"]["filename"]}`
+    **type**: `#{issue["metadata"]["type"]}`
+    **status**: `#{issue["status"]}`
+    **level**: `#{issue["level"]}`
+    **platform**: `#{issue["platform"]}`
+
+    **issue url**: issue_url
     """
 
     query = %{
       "name" => issue["title"],
       "desc" => desc,
-      "urlSource" => issue_url
+      # "urlSource" => issue_url
     }
 
     {:ok, _} = HttpClient.create_new_card(query)
