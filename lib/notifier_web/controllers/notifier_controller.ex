@@ -36,7 +36,6 @@ defmodule NotifierWeb.NotifierController do
     first seen: #{issue["first_seen"]}
     last seen: #{issue["last_seen"]}
     platform: #{issue["platform"]}
-    event_count: #{issue["count"]}
     """
 
     query = %{
