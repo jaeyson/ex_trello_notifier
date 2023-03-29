@@ -30,13 +30,16 @@ defmodule NotifierWeb.NotifierController do
     ### #{issue["title"]}
 
     **culprit**: `#{issue["culprit"]}`
-    **filename**: `#{issue["metadata"]["filename"]}`
+
     **type**: `#{issue["metadata"]["type"]}`
+
     **status**: `#{issue["status"]}`
+
     **level**: `#{issue["level"]}`
+
     **platform**: `#{issue["platform"]}`
 
-    **issue url**: issue_url
+    [issue_url](#{issue_url})
     """
 
     query = %{
