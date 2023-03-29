@@ -6,33 +6,43 @@ defmodule NotifierWeb.NotifierController do
 
   action_fallback FallbackController
 
-  def index(conn, _params) do
-    render(conn, "index.json")
+  def sentry_project_host, do: Application.get_env(:notifier, :sentry_project_host)
+  def sentry_issue_path, do: Application.get_env(:notifier, :sentry_issue_path)
+
+  def index(conn, params) do
+    IO.inspect(params, label: "index")
+    render(conn, "index.json", params: params)
   end
 
   def sentry(conn, params) do
     issue = get_in(params, ["data", "issue"])
-    title = issue["title"]
-    status = issue["status"]
-    level = issue["level"]
-    last_seen = issue["lastSeen"]
-    first_seen = issue["firstSeen"]
-    permalink = issue["permalink"]
-    # event_count = issue["count"]
+    path = Path.join([sentry_issue_path(), issue["id"]])
+
+    issue_url =
+      %URI{
+        scheme: HttpClient.scheme(),
+        host: sentry_project_host(),
+        path: path
+      }
+      |> URI.to_string()
 
     desc = """
-    #{title}
-    status: #{status}
-    level: #{level}
-    permalink: #{permalink}
-    first seen: #{first_seen}
-    last seen: #{last_seen}
+    #{issue["title"]}
+    culprit: #{issue["culprit"]}
+    filename: #{issue["metadata"]["filename"]}
+    type: #{issue["metadata"]["type"]}
+    status: #{issue["status"]}
+    level: #{issue["level"]}
+    first seen: #{issue["first_seen"]}
+    last seen: #{issue["last_seen"]}
+    platform: #{issue["platform"]}
+    event_count: #{issue["count"]}
     """
 
     query = %{
-      "name" => title,
+      "name" => issue["title"],
       "desc" => desc,
-      "urlSource" => permalink
+      "urlSource" => issue_url
     }
 
     :ok = HttpClient.create_new_card(query)
@@ -40,5 +50,4 @@ defmodule NotifierWeb.NotifierController do
     # render(conn, "sentry.json", params: params)
     render(conn, "sentry.json")
   end
-  
 end

@@ -8,7 +8,7 @@ defmodule NotifierWeb.Router do
   scope "/", NotifierWeb do
     pipe_through :api
 
-    get "/", NotifierController, :index
+    post "/", NotifierController, :index
     post "/sentry", NotifierController, :sentry
   end
 end

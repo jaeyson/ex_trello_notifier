@@ -1,6 +1,6 @@
 defmodule NotifierWeb.NotifierView do
   use NotifierWeb, :view
-  
+
   def render("index.json", _params) do
     %{message: "ok"}
   end

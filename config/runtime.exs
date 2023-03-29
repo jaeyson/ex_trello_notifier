@@ -26,7 +26,9 @@ config :notifier,
   board_id: System.get_env("TRELLO_BOARD_ID"),
   base_url: "api.trello.com",
   api_version: "1",
-  scheme: "https"
+  scheme: "https",
+  sentry_project_host: System.get_env("SENTRY_PROJECT_HOST"),
+  sentry_issue_path: "issues"
 
 if config_env() == :prod do
   # The secret key base is used to sign/encrypt cookies and other secrets.
