@@ -45,7 +45,7 @@ defmodule NotifierWeb.NotifierController do
       "urlSource" => issue_url
     }
 
-    :ok = HttpClient.create_new_card(query)
+    {:ok, _} = HttpClient.create_new_card(query)
 
     # render(conn, "sentry.json", params: params)
     render(conn, "sentry.json")
