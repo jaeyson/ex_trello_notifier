@@ -16,7 +16,7 @@ defmodule NotifierWeb.NotifierController do
 
   def sentry(conn, params) do
     issue = get_in(params, ["data", "issue"])
-    path = Path.join([sentry_issue_path(), issue["id"]])
+    path = Path.join(["/", sentry_issue_path(), issue["id"]])
 
     issue_url =
       %URI{
