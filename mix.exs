@@ -1,14 +1,15 @@
-defmodule Notifier.MixProject do
+defmodule ExTrelloNotifier.MixProject do
   use Mix.Project
 
-  @source_url "https://github.com/jaeyson/sentry_notifier"
-  @version "0.1.1"
-  @description "Create Trello cards from Sentry issues (webhook)"
-  @canonical "http://hexdocs.pm/sentry_notifier"
+  @source_url "https://github.com/jaeyson/ex_trello_notifier"
+  @version "0.1.0"
+  @description "Create Trello cards from issues using webhook"
+  @canonical "http://hexdocs.pm/ex_trello_notifier"
+  @project_name "ExTrelloNotifier"
 
   def project do
     [
-      app: :sentry_notifier,
+      app: :ex_trello_notifier,
       version: @version,
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +20,7 @@ defmodule Notifier.MixProject do
       description: @description,
       docs: docs(),
       package: package(),
-      name: "Sentry Notifier",
+      name: @project_name,
       source_url: @source_url
     ]
   end
@@ -29,7 +30,7 @@ defmodule Notifier.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Notifier.Application, []},
+      mod: {ExTrelloNotifier.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

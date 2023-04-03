@@ -1,4 +1,4 @@
-defmodule Notifier.Application do
+defmodule ExTrelloNotifier.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -9,18 +9,18 @@ defmodule Notifier.Application do
   def start(_type, _args) do
     children = [
       # Start the Telemetry supervisor
-      NotifierWeb.Telemetry,
+      ExTrelloNotifierWeb.Telemetry,
       # Start the PubSub system
-      {Phoenix.PubSub, name: Notifier.PubSub},
+      {Phoenix.PubSub, name: ExTrelloNotifier.PubSub},
       # Start the Endpoint (http/https)
-      NotifierWeb.Endpoint
-      # Start a worker by calling: Notifier.Worker.start_link(arg)
-      # {Notifier.Worker, arg}
+      ExTrelloNotifierWeb.Endpoint
+      # Start a worker by calling: ExTrelloNotifier.Worker.start_link(arg)
+      # {ExTrelloNotifier.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Notifier.Supervisor]
+    opts = [strategy: :one_for_one, name: ExTrelloNotifier.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
@@ -28,7 +28,7 @@ defmodule Notifier.Application do
   # whenever the application is updated.
   @impl true
   def config_change(changed, _new, removed) do
-    NotifierWeb.Endpoint.config_change(changed, removed)
+    ExTrelloNotifierWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

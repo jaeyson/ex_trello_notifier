@@ -1,0 +1,14 @@
+version: "2"
+authtoken: INSERT_AUTH_TOKEN_HERE
+region: ap
+
+tunnels:
+  notifier:
+    proto: http
+    addr: 4000
+  test:
+    proto: http
+    addr: 4444
+
+# ngrok start --config=ngrok.yml test notifier
+

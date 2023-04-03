@@ -1,4 +1,4 @@
-defmodule NotifierWeb.ErrorHelpers do
+defmodule ExTrelloNotifierWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """

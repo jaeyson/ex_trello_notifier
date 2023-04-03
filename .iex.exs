@@ -1,4 +1,4 @@
-alias Notifier.HttpClient
+alias ExTrelloNotifier.HttpClient
 
 IEx.configure(
   inspect: [

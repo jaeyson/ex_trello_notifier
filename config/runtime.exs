@@ -12,23 +12,21 @@ import Config
 # If you use `mix release`, you need to explicitly enable the server
 # by passing the PHX_SERVER=true when you start it:
 #
-#     PHX_SERVER=true bin/notifier start
+#     PHX_SERVER=true bin/ex_trello_notifier start
 #
 # Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
 # script that automatically sets the env var above.
 if System.get_env("PHX_SERVER") do
-  config :sentry_notifier, NotifierWeb.Endpoint, server: true
+  config :ex_trello_notifier, ExTrelloNotifierWeb.Endpoint, server: true
 end
 
-config :sentry_notifier,
-  api_key: System.get_env("TRELLO_API_KEY"),
-  api_token: System.get_env("TRELLO_API_TOKEN"),
-  board_id: System.get_env("TRELLO_BOARD_ID"),
-  base_url: "api.trello.com",
-  api_version: "1",
-  scheme: "https",
-  sentry_project_host: System.get_env("SENTRY_PROJECT_HOST"),
-  sentry_issue_path: "issues"
+config :ex_trello_notifier,
+  trello_api_key: System.get_env("TRELLO_API_KEY"),
+  trello_api_token: System.get_env("TRELLO_API_TOKEN"),
+  trello_board_id: System.get_env("TRELLO_BOARD_ID"),
+  trello_base_url: "api.trello.com",
+  trello_api_version: "1",
+  scheme: "https"
 
 if config_env() == :prod do
   # The secret key base is used to sign/encrypt cookies and other secrets.
@@ -46,7 +44,7 @@ if config_env() == :prod do
   host = System.get_env("PHX_HOST") || "example.com"
   port = String.to_integer(System.get_env("PORT") || "4000")
 
-  config :sentry_notifier, NotifierWeb.Endpoint,
+  config :ex_trello_notifier, NotifierWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
     http: [
       # Enable IPv6 and bind on all interfaces.

@@ -1,12 +1,12 @@
-defmodule NotifierWeb do
+defmodule ExTrelloNotifierWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use NotifierWeb, :controller
-      use NotifierWeb, :view
+      use ExTrelloNotifierWeb, :controller
+      use ExTrelloNotifierWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,18 +19,18 @@ defmodule NotifierWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: NotifierWeb
+      use Phoenix.Controller, namespace: ExTrelloNotifierWeb
 
       import Plug.Conn
-      alias NotifierWeb.Router.Helpers, as: Routes
+      alias ExTrelloNotifierWeb.Router.Helpers, as: Routes
     end
   end
 
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/notifier_web/templates",
-        namespace: NotifierWeb
+        root: "lib/ex_trello_notifier_web/templates",
+        namespace: ExTrelloNotifierWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -61,8 +61,8 @@ defmodule NotifierWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import NotifierWeb.ErrorHelpers
-      alias NotifierWeb.Router.Helpers, as: Routes
+      import ExTrelloNotifierWeb.ErrorHelpers
+      alias ExTrelloNotifierWeb.Router.Helpers, as: Routes
     end
   end
 

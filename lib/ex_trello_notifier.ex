@@ -1,4 +1,4 @@
-defmodule Notifier do
+defmodule ExTrelloNotifier do
   @moduledoc """
   Notifier keeps the contexts that define your domain
   and business logic.

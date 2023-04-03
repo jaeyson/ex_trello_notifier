@@ -1,12 +1,12 @@
-defmodule NotifierWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :sentry_notifier
+defmodule ExTrelloNotifierWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :ex_trello_notifier
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_notifier_key",
+    key: "_ex_trello_notifier_key",
     signing_salt: "qDR7SDX3"
   ]
 
@@ -18,7 +18,7 @@ defmodule NotifierWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :sentry_notifier,
+    from: :ex_trello_notifier,
     gzip: false,
     only: ~w(assets fonts images favicon.ico robots.txt)
 
@@ -39,5 +39,5 @@ defmodule NotifierWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug NotifierWeb.Router
+  plug ExTrelloNotifierWeb.Router
 end

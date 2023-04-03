@@ -1,5 +1,5 @@
-defmodule NotifierWeb.ErrorView do
-  use NotifierWeb, :view
+defmodule ExTrelloNotifierWeb.ErrorView do
+  use ExTrelloNotifierWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

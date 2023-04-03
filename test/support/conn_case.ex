@@ -1,4 +1,4 @@
-defmodule NotifierWeb.ConnCase do
+defmodule ExTrelloNotifierWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -22,12 +22,12 @@ defmodule NotifierWeb.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import NotifierWeb.ConnCase
+      import ExTrelloNotifierWeb.ConnCase
 
-      alias NotifierWeb.Router.Helpers, as: Routes
+      alias ExTrelloNotifierWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint NotifierWeb.Endpoint
+      @endpoint ExTrelloNotifierWeb.Endpoint
     end
   end
 

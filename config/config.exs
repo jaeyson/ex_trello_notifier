@@ -8,10 +8,10 @@
 import Config
 
 # Configures the endpoint
-config :sentry_notifier, NotifierWeb.Endpoint,
+config :ex_trello_notifier, ExTrelloNotifierWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: NotifierWeb.ErrorView, accepts: ~w(json), layout: false],
-  pubsub_server: Notifier.PubSub,
+  render_errors: [view: ExTrelloNotifierWeb.ErrorView, accepts: ~w(json), layout: false],
+  pubsub_server: ExTrelloNotifier.PubSub,
   live_view: [signing_salt: "N24GCiXY"]
 
 # Configures Elixir's Logger
