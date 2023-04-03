@@ -2,20 +2,26 @@
 
 ## TODO
 
-- add project (kanban, automation)
-- add cachex for retrieving list id
-- verify sentry webhook signature (security)
-- docs (typespecs, docs/moduledocs, etc.)
-- tests (unit, mocks)
+- [x] ~implement trello card via rest api~
+- [x] ~process sentry webhook response body~
+- [x] ~add trello label for cards resolved/unresolved~
+- add Github project (kanban, automation)
+- add Cachex for retrieving list id and labels
+- verify Sentry webhook signature (security)
+- add code docs (typespecs, docs/moduledocs)
 - use markdown for creating card description (TBA)
-- add credo
-- add sobelow
-- add honeybadger
-- add logflare
-- add ci workflow
+- add Credo (code linter)
+- add Sobelow (security checker for framework)
+- add Honeybadger (error monitoring)
+- add Uptimerobot (uptime monitoring)
+- add Logflare (log aggregator)
+- add ci workflow (unit, mocks)
 - add code coverage (deps, ci)
 - add badge (ci, coverage, dependabot, etc.)
 - add semver
+- update README file to contain instructions from Trello, Sentry and sample deployment for Phoenix framework
+- publish docs (hexdocs for Phoenix framework)
+- add cd workflow (fly.io)
 
 To start your Phoenix server:
 

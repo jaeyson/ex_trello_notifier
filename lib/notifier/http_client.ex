@@ -1,6 +1,22 @@
 defmodule Notifier.HttpClient do
   @moduledoc false
 
+  @label_colors [
+    :red,
+    :green,
+    :yellow,
+    :orange,
+    :purple,
+    :blue,
+  ]
+
+  @status_names [
+    "Recurring",
+    "Resolved",
+    "Wont Fix",
+    "Unresolved"
+  ]
+
   def api_key, do: Application.get_env(:notifier, :api_key)
   def api_token, do: Application.get_env(:notifier, :api_token)
   def api_version, do: Application.get_env(:notifier, :api_version)
@@ -12,7 +28,7 @@ defmodule Notifier.HttpClient do
   def request(method, path, query) do
     path = Path.join(["/", api_version(), path])
     credentials = %{"key" => api_key(), "token" => api_token()}
-    query = Map.merge(query, credentials)
+    query = Map.merge(query, credentials) |> IO.inspect(label: "request/3 query")
 
     url = %URI{
       scheme: scheme(),
@@ -62,14 +78,29 @@ defmodule Notifier.HttpClient do
     |> Map.get("id")
   end
 
-  def create_new_card(%{"name" => _, "desc" => _, "urlSource" => _} = query) do
+  def create_new_card(%{"name" => _, "desc" => _} = query) do
     list_name = "todo"
     method = :post
     path = "cards"
-    query = Map.put(query, "idList", get_list_id(list_name))
+    label_id = get_label_id("Unresolved")
+    query =
+      query
+      |> Map.put("idList", get_list_id(list_name))
+      |> Map.put("idLabels", label_id)
 
-    {:ok, _} = request(method, path, query)
+    request(method, path, query)
+  end
 
-    :ok
+  def get_label_id(status_name) when status_name in @status_names do
+    method = :get
+    path = "boards/#{board_id()}/labels"
+    query = %{}
+
+    {:ok, labels} = request(method, path, query)
+
+    labels
+    |> Enum.filter(& &1["name"] === status_name)
+    |> hd()
+    |> Map.get("id")
   end
 end
