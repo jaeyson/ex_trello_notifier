@@ -1,16 +1,26 @@
 defmodule Notifier.MixProject do
   use Mix.Project
 
+  @source_url "https://github.com/jaeyson/notifier"
+  @version "0.1.0"
+  @description "Create Trello cards from Sentry issues (webhook)"
+  @canonical "http://hexdocs.pm/notifier"
+
   def project do
     [
       app: :notifier,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      description: @description,
+      docs: docs(),
+      package: package(),
+      name: "Notifier",
+      source_url: @source_url
     ]
   end
 
@@ -33,12 +43,38 @@ defmodule Notifier.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:ex_doc, "~> 0.29.4"},
       {:phoenix, "~> 1.6.15"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:httpoison, "~> 2.1"}
+    ]
+  end
+
+  defp docs do
+    [
+      api_reference: false,
+      main: "readme",
+      source_ref: "v#{@version}",
+      source_url: @source_url,
+      canonical: @canonical,
+      extras: [
+        "README.md",
+        "CHANGELOG.md",
+        "LICENSE"
+      ]
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: ["Jaeyson Anthony Y."],
+      licenses: ["MIT"],
+      links: %{
+        "Github" => @source_url
+      }
     ]
   end
 
