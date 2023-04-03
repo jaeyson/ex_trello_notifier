@@ -17,10 +17,10 @@ import Config
 # Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
 # script that automatically sets the env var above.
 if System.get_env("PHX_SERVER") do
-  config :notifier, NotifierWeb.Endpoint, server: true
+  config :sentry_notifier, NotifierWeb.Endpoint, server: true
 end
 
-config :notifier,
+config :sentry_notifier,
   api_key: System.get_env("TRELLO_API_KEY"),
   api_token: System.get_env("TRELLO_API_TOKEN"),
   board_id: System.get_env("TRELLO_BOARD_ID"),
@@ -46,7 +46,7 @@ if config_env() == :prod do
   host = System.get_env("PHX_HOST") || "example.com"
   port = String.to_integer(System.get_env("PORT") || "4000")
 
-  config :notifier, NotifierWeb.Endpoint,
+  config :sentry_notifier, NotifierWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
     http: [
       # Enable IPv6 and bind on all interfaces.

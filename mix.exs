@@ -1,14 +1,14 @@
 defmodule Notifier.MixProject do
   use Mix.Project
 
-  @source_url "https://github.com/jaeyson/notifier"
-  @version "0.1.0"
+  @source_url "https://github.com/jaeyson/sentry_notifier"
+  @version "0.1.1"
   @description "Create Trello cards from Sentry issues (webhook)"
-  @canonical "http://hexdocs.pm/notifier"
+  @canonical "http://hexdocs.pm/sentry_notifier"
 
   def project do
     [
-      app: :notifier,
+      app: :sentry_notifier,
       version: @version,
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule Notifier.MixProject do
       description: @description,
       docs: docs(),
       package: package(),
-      name: "Notifier",
+      name: "Sentry Notifier",
       source_url: @source_url
     ]
   end
@@ -49,6 +49,7 @@ defmodule Notifier.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:httpoison, "~> 2.1"}
     ]
   end

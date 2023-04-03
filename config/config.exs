@@ -8,7 +8,7 @@
 import Config
 
 # Configures the endpoint
-config :notifier, NotifierWeb.Endpoint,
+config :sentry_notifier, NotifierWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [view: NotifierWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: Notifier.PubSub,

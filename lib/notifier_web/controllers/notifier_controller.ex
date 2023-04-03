@@ -1,49 +1,40 @@
 defmodule NotifierWeb.NotifierController do
   use NotifierWeb, :controller
 
-  alias NotifierWeb.FallbackController
   alias Notifier.HttpClient
+  alias NotifierWeb.FallbackController
 
   action_fallback FallbackController
 
-  def sentry_project_host, do: Application.get_env(:notifier, :sentry_project_host)
-  def sentry_issue_path, do: Application.get_env(:notifier, :sentry_issue_path)
+  def sentry_project_host, do: Application.get_env(:sentry_notifier, :sentry_project_host)
+  def sentry_issue_path, do: Application.get_env(:sentry_notifier, :sentry_issue_path)
 
   def index(conn, params) do
-    IO.inspect(params, label: "index")
     render(conn, "index.json", params: params)
   end
 
   def sentry(conn, params) do
-    issue = get_in(params, ["data", "issue"])
-    path = Path.join(["/", sentry_issue_path(), issue["id"]])
-
-    issue_url =
-      %URI{
-        scheme: HttpClient.scheme(),
-        host: sentry_project_host(),
-        path: path
-      }
-      |> URI.to_string()
+    IO.inspect(params, label: "sentry action params")
+    culprit = params["culprit"]
+    issue_url = params["url"]
+    project_name = params["project_name"]
+    message = params["message"]
+    level = params["level"]
 
     desc = """
-    ### #{issue["title"]}
+    ### #{message}
 
-    **culprit**: `#{issue["culprit"]}`
+    **Culprit**: `#{culprit}`
 
-    **type**: `#{issue["metadata"]["type"]}`
+    **Project**: `#{project_name}`
 
-    **status**: `#{issue["status"]}`
+    **Level**: `#{level}`
 
-    **level**: `#{issue["level"]}`
-
-    **platform**: `#{issue["platform"]}`
-
-    [issue_url](#{issue_url})
+    [Issue_url: #{issue_url}](#{issue_url})
     """
 
     query = %{
-      "name" => issue["title"],
+      "name" => message,
       "desc" => desc,
       # "urlSource" => issue_url
     }

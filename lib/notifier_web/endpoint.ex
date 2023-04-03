@@ -1,5 +1,5 @@
 defmodule NotifierWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :notifier
+  use Phoenix.Endpoint, otp_app: :sentry_notifier
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
@@ -18,7 +18,7 @@ defmodule NotifierWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :notifier,
+    from: :sentry_notifier,
     gzip: false,
     only: ~w(assets fonts images favicon.ico robots.txt)
 

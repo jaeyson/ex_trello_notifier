@@ -17,18 +17,18 @@ defmodule Notifier.HttpClient do
     "Unresolved"
   ]
 
-  def api_key, do: Application.get_env(:notifier, :api_key)
-  def api_token, do: Application.get_env(:notifier, :api_token)
-  def api_version, do: Application.get_env(:notifier, :api_version)
-  def base_url, do: Application.get_env(:notifier, :base_url)
-  def board_id, do: Application.get_env(:notifier, :board_id)
-  def scheme, do: Application.get_env(:notifier, :scheme)
+  def api_key, do: Application.get_env(:sentry_notifier, :api_key)
+  def api_token, do: Application.get_env(:sentry_notifier, :api_token)
+  def api_version, do: Application.get_env(:sentry_notifier, :api_version)
+  def base_url, do: Application.get_env(:sentry_notifier, :base_url)
+  def board_id, do: Application.get_env(:sentry_notifier, :board_id)
+  def scheme, do: Application.get_env(:sentry_notifier, :scheme)
 
   @doc false
   def request(method, path, query) do
     path = Path.join(["/", api_version(), path])
     credentials = %{"key" => api_key(), "token" => api_token()}
-    query = Map.merge(query, credentials) |> IO.inspect(label: "request/3 query")
+    query = Map.merge(query, credentials)
 
     url = %URI{
       scheme: scheme(),
