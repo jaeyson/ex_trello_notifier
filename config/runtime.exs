@@ -20,6 +20,14 @@ if System.get_env("PHX_SERVER") do
   config :ex_trello_notifier, ExTrelloNotifierWeb.Endpoint, server: true
 end
 
+config :ex_trello_notifier,
+  trello_api_key: System.get_env("TRELLO_API_KEY"),
+  trello_api_token: System.get_env("TRELLO_API_TOKEN"),
+  trello_board_id: System.get_env("TRELLO_BOARD_ID"),
+  trello_base_url: "api.trello.com",
+  trello_api_version: "1",
+  scheme: "https"
+
 if config_env() == :prod do
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you
