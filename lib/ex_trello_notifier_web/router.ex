@@ -7,5 +7,7 @@ defmodule ExTrelloNotifierWeb.Router do
 
   scope "/api", ExTrelloNotifierWeb do
     pipe_through :api
+
+    get "/notify", NotifierController, :notify
   end
 end
