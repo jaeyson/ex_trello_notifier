@@ -1,16 +1,27 @@
 defmodule ExTrelloNotifier.MixProject do
   use Mix.Project
 
+  @source_url "https://github.com/jaeyson/ex_trello_notifier"
+  @version "0.1.0"
+  @description "Create Trello cards from issues using webhook"
+  @canonical "http://hexdocs.pm/ex_trello_notifier"
+  @project_name "ExTrelloNotifier"
+
   def project do
     [
       app: :ex_trello_notifier,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      description: @description,
+      docs: docs(),
+      package: package(),
+      name: @project_name,
+      source_url: @source_url
     ]
   end
 
@@ -38,7 +49,33 @@ defmodule ExTrelloNotifier.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:httpoison, "~> 2.1"}
+    ]
+  end
+
+  defp docs do
+    [
+      api_reference: false,
+      main: "readme",
+      source_ref: "v#{@version}",
+      source_url: @source_url,
+      canonical: @canonical,
+      extras: [
+        "README.md",
+        "CHANGELOG.md",
+        "LICENSE"
+      ]
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: ["Jaeyson Anthony Y."],
+      licenses: ["MIT"],
+      links: %{
+        "Github" => @source_url
+      }
     ]
   end
 
